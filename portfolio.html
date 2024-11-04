@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portfolio</title>
+    <!-- Include Pico CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li>
+                    <a href="index.html" >
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="skills.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="portfolio.html" class="active">
+                        <i class="fas fa-briefcase"></i>
+                        <span>PORTOFOLIO</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="courses.html">
+                        <i class="fas fa-book"></i>
+                        <span>COURSES</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="portfolio-section">
+    <main class="portfolio-container">
+        <section class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-item" data-project="project1">
+                <div class="project-label">Project</div>
+                <h3>Automated Image Tagging System</h3>
+                <button class="view-project">View Details</button>
+            </div>
+            <!-- Project 2 -->
+            <div class="portfolio-item" data-project="project2">
+                <div class="project-label">Project</div>
+                <h3>Text Classification Model</h3>
+                <button class="view-project">View Details</button>
+            </div>
+            <!-- Project 3 -->
+            <div class="portfolio-item" data-project="project3">
+                <div class="project-label">Project</div>
+                <h3>Speech-to-Text Conversion</h3>
+                <button class="view-project">View Details</button>
+            </div>
+            <!-- Additional projects can be added in a similar format -->
+        </section>
+    
+        <!-- Modal for project details -->
+        <div id="project-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="project-details"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("project-modal");
+            const modalContent = document.getElementById("project-details");
+            const closeModal = document.querySelector(".close-modal");
+        
+            // Project details data
+            const projects = {
+
+                    project1: {
+        title: "Automated Image Tagging System",
+        description: `
+            <p>This project involves creating an automated image tagging system using a machine learning model trained on the CIFAR-10 dataset.</p>
+            <img src="121.jpg" alt="Image Tagging System Screenshot">
+            <p>The model is integrated into a Flask API to allow easy image classification through an HTTP interface, and deployed in a Docker container.</p>
+            <img src="131.jpg" alt="Docker Setup Screenshot">
+            <p>Explore more on <a href="https://github.com/your-repo" target="_blank">GitHub</a>.</p>
+        `
+    },
+
+
+                project2: {
+                    title: "Text Classification Model",
+                    description: `
+                        <ul>
+                            <li>Developed a model for classifying movie reviews into positive and negative sentiments.</li>
+                            <li>Utilized TensorFlow and AWS SageMaker for model training and deployment.</li>
+                            <li>Created a Flask-based API to expose predictions via REST endpoints.</li>
+                        </ul>
+                        <a href="https://github.com/your-repo" target="_blank">GitHub Repository</a>
+                    `
+                },
+                project3: {
+                    title: "Speech-to-Text Conversion",
+                    description: `
+                        <ul>
+                            <li>Implemented an NLP project using Amazon Transcribe to convert speech into text.</li>
+                            <li>Integrated with AWS SageMaker for model training on large datasets.</li>
+                            <li>Enhanced model with custom vocabulary for improved accuracy.</li>
+                        </ul>
+                        <a href="https://github.com/your-repo" target="_blank">GitHub Repository</a>
+                    `
+                }
+            };
+        
+            // Open modal and show project details
+            document.querySelectorAll(".portfolio-item").forEach(item => {
+                item.addEventListener("click", () => {
+                    const projectId = item.getAttribute("data-project");
+                    const project = projects[projectId];
+                    if (project) {
+                        modalContent.innerHTML = `<h2>${project.title}</h2>${project.description}`;
+                        modal.style.display = "flex";
+                    }
+                });
+            });
+        
+            // Close modal
+            closeModal.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        
+            // Close modal when clicking outside of content
+            window.addEventListener("click", (event) => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+        </script>
+      
+    </body>
+</html>
